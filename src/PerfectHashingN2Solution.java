@@ -1,4 +1,3 @@
-import java.util.Scanner;
 
 public class PerfectHashingN2Solution {
     Element[] storage;
@@ -7,10 +6,12 @@ public class PerfectHashingN2Solution {
     int hashbits;
     int N2;
     int numberRehashing=0;
-    public PerfectHashingN2Solution(int sizeDesired,int k){
+    int maxSize;
+    public PerfectHashingN2Solution(int sizeDesired,int keybits){
+        maxSize = sizeDesired;
         this.hashbits=(int)Math.ceil(Math.log(Math.pow(sizeDesired,2))/Math.log(2));
         this.N2=(int)Math.pow(2,hashbits);
-        this.keybits=k;
+        this.keybits=keybits;
         storage=new Element[N2];
         u=new UniversalHashing(this.hashbits,this.keybits);
     }
@@ -27,9 +28,15 @@ public class PerfectHashingN2Solution {
                 System.out.println("Rehashed in N^2, n rehash = " + numberRehashing);
             }
         }
-
     }
-
+    //to insert beyond size
+    public void InsertAdditional(int key, int value){
+        this.hashbits=(int)Math.ceil(Math.log(Math.pow(maxSize+1,2))/Math.log(2));
+        this.N2=(int)Math.pow(2,hashbits);
+        this.u=new UniversalHashing(this.hashbits,this.keybits);
+        this.maxSize++;
+        insert(key, value);
+    }
     public boolean rehashAndInsert(int key,int value){
         Element[] newStorage=new Element[this.N2];
         u=new UniversalHashing(this.hashbits,this.keybits);
@@ -58,7 +65,4 @@ public class PerfectHashingN2Solution {
             else System.out.println( storage[i].key + " >> " +storage[i].value);
         }
     }
-
-
-
 }

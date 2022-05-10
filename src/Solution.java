@@ -16,7 +16,7 @@ public class Solution {
             int value=sc.nextInt();
             p1.insert(key,value);
         }
-
+        sc.close();
         System.out.println("RESULTS");
         p1.printStorageContents();
 
