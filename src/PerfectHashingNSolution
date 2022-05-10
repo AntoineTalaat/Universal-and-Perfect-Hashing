@@ -4,6 +4,7 @@ public class PerfectHashingNSolution {
     UniversalHashing FirstLevelHashing;
     int keybits = 32;
     int size = 0;
+    int maxSize = 0;
     int numberRehashing = 0;
     int FirstLevelCollisionCount = 0;
     int SecondLevelRehashingCount = 0;
@@ -11,10 +12,13 @@ public class PerfectHashingNSolution {
     public PerfectHashingNSolution(int size,int keybits){
         this.FirstLevelHashing = new UniversalHashing((int)Math.ceil(Math.log(size)/Math.log(2)),keybits);
         this.keybits = keybits;
+        this.maxSize = size;
         this.Buckets = new PerfectHashingN2Solution[size];
     }
     public void insert(int key, int value){
         int hashvalue=this.FirstLevelHashing.getHashValue(key);
+        this.size++;
+        assert this.size <= this.maxSize;
         if(Buckets[hashvalue]==null) //no collision
             Buckets[hashvalue]=new PerfectHashingN2Solution(1,keybits);
             Buckets[hashvalue].insert(key,value);
