@@ -20,9 +20,9 @@ public class PerfectHashingNSolution {
             Buckets[hashvalue].insert(key,value);
         else{
             //collision
-            //REHASHING
             this.FirstLevelCollisionCount++;
             int prevcount = Buckets[hashvalue].numberRehashing;
+            //REHASHING
             Buckets[hashvalue].InsertAdditional(key,value);
             this.SecondLevelRehashingCount+= Buckets[hashvalue].numberRehashing - prevcount;
         }
