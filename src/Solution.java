@@ -7,7 +7,7 @@ public class Solution {
         System.out.println("Enter number of elements:");
         int num=sc.nextInt();
 
-        PerfectHashingN2Solution p1=new PerfectHashingN2Solution(num,keyBits);
+        PerfectHashingNSolution p1=new PerfectHashingNSolution(num,keyBits);
 
         for(int i=0;i<num;i++){
             sc.nextLine();

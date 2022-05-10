@@ -1,8 +1,8 @@
 public class Element {
     int key;
-    int value;
+    Object value;
 
-    public Element(int k,int v){
+    public Element(int k,Object v){
         key=k;
         value=v;
     }

@@ -1,5 +1,5 @@
 
-public class PerfectHashingN2Solution {
+public class PerfectHashingN2Solution implements IPerfectHashing{
     Element[] storage;
     UniversalHashing u;
     int keybits;
@@ -16,7 +16,7 @@ public class PerfectHashingN2Solution {
         u=new UniversalHashing(this.hashbits,this.keybits);
     }
 
-    public void insert(int key,int value){
+    public void insert(int key,Object value){
         int hashvalue=u.getHashValue(key);
         if(storage[hashvalue]==null) //no collision
             storage[hashvalue]=new Element(key,value);
@@ -30,14 +30,14 @@ public class PerfectHashingN2Solution {
         }
     }
     //to insert beyond size
-    public void InsertAdditional(int key, int value){
+    public void InsertAdditional(int key, Object value){
         this.hashbits=(int)Math.ceil(Math.log(Math.pow(maxSize+1,2))/Math.log(2));
         this.N2=(int)Math.pow(2,hashbits);
         this.u=new UniversalHashing(this.hashbits,this.keybits);
         this.maxSize++;
         insert(key, value);
     }
-    public boolean rehashAndInsert(int key,int value){
+    public boolean rehashAndInsert(int key,Object value){
         Element[] newStorage=new Element[this.N2];
         u=new UniversalHashing(this.hashbits,this.keybits);
         for(int i=0;i<storage.length;i++){
@@ -57,7 +57,9 @@ public class PerfectHashingN2Solution {
         }else
             return false;
     }
-
+    public Object getValue(int key){
+        return this.storage[u.getHashValue(key)].value;
+    }
     public void printStorageContents(){
         for(int i=0 ;i<storage.length;i++){
             System.out.print(i + " ");
