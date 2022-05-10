@@ -5,14 +5,13 @@ public class PerfectHashingN2Solution {
     UniversalHashing u;
     int keybits;
     int hashbits;
-    int N;
+    int N2;
     int numberRehashing=0;
     public PerfectHashingN2Solution(int sizeDesired,int k){
-        this.hashbits=(int)Math.ceil(Math.log(sizeDesired)/Math.log(2));
-        this.N=(int)Math.pow(2,hashbits);
+        this.hashbits=(int)Math.ceil(Math.log(Math.pow(sizeDesired,2))/Math.log(2));
+        this.N2=(int)Math.pow(2,hashbits);
         this.keybits=k;
-        this.hashbits=this.hashbits*2;
-        storage=new Element[(int)Math.pow(N,2)];
+        storage=new Element[N2];
         u=new UniversalHashing(this.hashbits,this.keybits);
     }
 
@@ -32,7 +31,7 @@ public class PerfectHashingN2Solution {
     }
 
     public boolean rehashAndInsert(int key,int value){
-        Element[] newStorage=new Element[(int)Math.pow(this.N,2)];
+        Element[] newStorage=new Element[this.N2];
         u=new UniversalHashing(this.hashbits,this.keybits);
         for(int i=0;i<storage.length;i++){
             if(storage[i]!=null){
