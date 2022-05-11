@@ -12,7 +12,7 @@ public class PerfectHashingNSolution implements IPerfectHashing{
         this.FirstLevelHashing = new UniversalHashing((int)Math.ceil(Math.log(size)/Math.log(2)),keybits);
         this.keybits = keybits;
         this.maxSize = size;
-        this.Buckets = new PerfectHashingN2Solution[size];
+        this.Buckets = new PerfectHashingN2Solution[(int) Math.pow(2,(int)Math.ceil(Math.log(size)/Math.log(2)))];
     }
     public void insert(int key, Object value){
         int hashvalue=this.FirstLevelHashing.getHashValue(key);
@@ -45,6 +45,9 @@ public class PerfectHashingNSolution implements IPerfectHashing{
             else{
                 System.out.print("empty\n");
             }
+            System.out.println("----------------");
         }
+        System.out.println("First Level Collisions: "+FirstLevelCollisionCount);
+        System.out.println("Second Level Rehashing count: "+SecondLevelRehashingCount);
     }
 }
