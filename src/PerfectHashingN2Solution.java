@@ -72,7 +72,7 @@ public class PerfectHashingN2Solution implements IPerfectHashing{
     }
     public void printStorageContents(){
         for(int i=0 ;i<storage.length;i++){
-            System.out.print(i + " ");
+            System.out.print(i + "|");
             if(storage[i]==null)             System.out.println("x");
             else System.out.println( storage[i].key + " >> " +storage[i].value);
         }

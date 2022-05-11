@@ -37,7 +37,7 @@ public class PerfectHashingNSolution implements IPerfectHashing{
     public void printStorageContents(){
         int i=0;
         for (PerfectHashingN2Solution bucket : Buckets) {
-            System.out.print("Bucket " + (i++)+" | ");
+            System.out.print("Bucket " + (i++)+" : ");
             if(bucket!=null){
                 System.out.print("\n");
                 bucket.printStorageContents();
