@@ -31,23 +31,23 @@ public class PerfectHashingNSolution implements IPerfectHashing{
             this.SecondLevelRehashingCount+= Buckets[hashvalue].numberRehashing - prevcount;
         }
     }
-    public Object getValue(int key){
-        return Buckets[this.FirstLevelHashing.getHashValue(key)].getValue(key);
-    }
-    public void printStorageContents(){
-        int i=0;
-        for (PerfectHashingN2Solution bucket : Buckets) {
-            System.out.print("Bucket " + (i++)+" : ");
-            if(bucket!=null){
-                System.out.print("\n");
-                bucket.printStorageContents();
-            }
-            else{
-                System.out.print("empty\n");
-            }
-            System.out.println("----------------");
-        }
-        System.out.println("First Level Collisions: "+FirstLevelCollisionCount);
-        System.out.println("Second Level Rehashing count: "+SecondLevelRehashingCount);
-    }
+//    public Object getValue(int key){
+//        return Buckets[this.FirstLevelHashing.getHashValue(key)].getValue(key);
+//    }
+//    public void printStorageContents(){
+//        int i=0;
+//        for (PerfectHashingN2Solution bucket : Buckets) {
+//            System.out.print("Bucket " + (i++)+" : ");
+//            if(bucket!=null){
+//                System.out.print("\n");
+//                bucket.printStorageContents();
+//            }
+//            else{
+//                System.out.print("empty\n");
+//            }
+//            System.out.println("----------------");
+//        }
+//        System.out.println("First Level Collisions: "+FirstLevelCollisionCount);
+//        System.out.println("Second Level Rehashing count: "+SecondLevelRehashingCount);
+//    }
 }
