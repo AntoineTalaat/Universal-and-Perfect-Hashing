@@ -10,6 +10,9 @@ public class PerfectHashingN2Solution implements IPerfectHashing{
     public PerfectHashingN2Solution(int sizeDesired,int keybits){
         maxSize = sizeDesired;
         this.hashbits=(int)Math.ceil(Math.log(Math.pow(sizeDesired,2))/Math.log(2));
+        if(sizeDesired > 0 && hashbits<1){
+            hashbits = 1;
+        }
         this.N2=(int)Math.pow(2,hashbits);
         this.keybits=keybits;
         storage=new Element[N2];
@@ -35,7 +38,9 @@ public class PerfectHashingN2Solution implements IPerfectHashing{
         this.N2=(int)Math.pow(2,hashbits);
         this.u=new UniversalHashing(this.hashbits,this.keybits);
         this.maxSize++;
-        insert(key, value);
+        while(!rehashAndInsert(key,value)){
+            numberRehashing++;
+        }
     }
     public boolean rehashAndInsert(int key,Object value){
         Element[] newStorage=new Element[this.N2];

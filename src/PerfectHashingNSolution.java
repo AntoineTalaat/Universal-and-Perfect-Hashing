@@ -8,7 +8,7 @@ public class PerfectHashingNSolution implements IPerfectHashing{
     int FirstLevelCollisionCount = 0;
     int SecondLevelRehashingCount = 0;
 
-    public PerfectHashingNSolution(int size,int keybits){
+    public PerfectHashingNSolution(int size, int keybits){
         this.FirstLevelHashing = new UniversalHashing((int)Math.ceil(Math.log(size)/Math.log(2)),keybits);
         this.keybits = keybits;
         this.maxSize = size;
@@ -37,8 +37,14 @@ public class PerfectHashingNSolution implements IPerfectHashing{
     public void printStorageContents(){
         int i=0;
         for (PerfectHashingN2Solution bucket : Buckets) {
-            System.out.println("Bucket " + (i++)+" | ");
-            bucket.printStorageContents();
+            System.out.print("Bucket " + (i++)+" | ");
+            if(bucket!=null){
+                System.out.print("\n");
+                bucket.printStorageContents();
+            }
+            else{
+                System.out.print("empty\n");
+            }
         }
     }
 }
