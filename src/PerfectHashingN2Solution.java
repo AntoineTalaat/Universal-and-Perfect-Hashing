@@ -8,18 +8,23 @@ public class PerfectHashingN2Solution implements IPerfectHashing{
     int numberRehashing=0;
     int maxSize;
     public PerfectHashingN2Solution(int sizeDesired,int keybits){
-        maxSize = sizeDesired;
-        this.hashbits=(int)Math.ceil(Math.log(Math.pow(sizeDesired,2))/Math.log(2));
-        if(sizeDesired > 0 && hashbits<1){
-            hashbits = 1;
-        }
-        this.N2=(int)Math.pow(2,hashbits);
         this.keybits=keybits;
+        maxSize = sizeDesired;
+        if(sizeDesired == 1){
+            this.storage = new Element[1];
+            return;
+        }
+        this.hashbits=(int)Math.ceil(Math.log(Math.pow(sizeDesired,2))/Math.log(2));
+        this.N2=(int)Math.pow(2,hashbits);
         storage=new Element[N2];
         u=new UniversalHashing(this.hashbits,this.keybits);
     }
 
     public void insert(int key,Object value){
+        if(maxSize == 1){
+            this.storage[0] = new Element(key,value);
+            return;
+        }
         int hashvalue=u.getHashValue(key);
         if(storage[hashvalue]==null) //no collision
             storage[hashvalue]=new Element(key,value);
