@@ -97,38 +97,3 @@ public class UniversalHashing {
         return matrix;
     }
 }
-//    public static void main(String[] args){
-//        UniversalHashing u = new UniversalHashing();
-//        //default key size = 32 bits
-//        int rows=4,col=32;
-//        boolean[][] m = u.generateRandomMatrix(rows,col);
-//
-//        //printing the random matrix
-//        for(int i=0;i<rows;i++){
-//            for (int j=0;j<col;j++){
-//                if(m[i][j]) System.out.print("1 ");
-//                else System.out.print("0 ");
-//            }
-//            System.out.println();
-//        }
-//
-//
-//        System.out.println("keyvector from method>>");
-//        boolean[] keyVector= u.getVectorFromInt(6,col);
-//        for(int i=0;i<keyVector.length;i++) {
-//            if(keyVector[i]) System.out.print("1 ");
-//            else System.out.print("0 ");
-//        }
-//        System.out.println();
-//
-//        System.out.println("Keyvector values from vectors>> "+u.getIntFromVector(keyVector,col));
-//
-//        System.out.println("result hash>>");
-//        boolean[] hashVector = u.generateHashVector(m,keyVector);
-//        for(int i=0;i<hashVector.length;i++) {
-//            if(hashVector[i]) System.out.print("1 ");
-//            else System.out.print("0 ");
-//        }
-//        System.out.println();
-//
-//    }
