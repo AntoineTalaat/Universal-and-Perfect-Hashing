@@ -102,4 +102,8 @@ public class PerfectHashingN2Solution implements IPerfectHashing{
     public int rehashingCount() {
         return this.numberRehashing;
     }
+    public int space(){
+        return this.maxSize;
+    }
+
 }

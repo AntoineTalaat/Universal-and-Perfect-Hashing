@@ -10,14 +10,14 @@ public class Analyzer {
     static final int K = 32;
     public static void main(String[] args){
         KeysGenerator generator= new KeysGenerator();
-        File nf= new File("n.txt");
-        File n2f= new File("n2.txt");
-
+        File nf_rehashing= new File("n_rehashing.txt");
+        File n2f_rehashing= new File("n2_rehashing.txt");
+        File nf_space= new File("n_sp.txt");
+        File n2f_space= new File("n2_sp.txt");
+        File[] files = {nf_rehashing,n2f_rehashing,nf_space,n2f_space};
         try {
-            if (nf.createNewFile() && n2f.createNewFile()) {
-                System.out.println("Files created: ");
-            } else {
-                System.out.println("Files already exists.");
+            for (File f : files) {
+                f.createNewFile();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -30,8 +30,10 @@ public class Analyzer {
                ArrayList<Map.Entry<Integer,Object>> input = generator.generateInput(i);
                N = new PerfectHashingNSolution(K,input);
                N2 = new PerfectHashingN2Solution(K,input);
-               appendToFile(nf,N.rehashingCount());
-               appendToFile(n2f,N2.rehashingCount());
+               appendToFile(nf_rehashing,N.rehashingCount());
+               appendToFile(n2f_rehashing,N2.rehashingCount());
+               appendToFile(nf_space,N.space());
+               appendToFile(n2f_space,N2.space());
         }
     }
 

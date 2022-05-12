@@ -79,4 +79,16 @@ public class PerfectHashingNSolution implements IPerfectHashing{
 public int rehashingCount() {
     return this.SecondLevelRehashingCount;
 }
+public int space(){
+    int space = 0;
+    for (int i = 0; i < Buckets.length; i++) {
+        if(Buckets[i]==null){
+            space++;
+        }
+        else{
+            space += Buckets[i].maxSize;
+        }
+    }
+    return space;
+}
 }
