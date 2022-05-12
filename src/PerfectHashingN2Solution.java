@@ -78,10 +78,10 @@ public class PerfectHashingN2Solution implements IPerfectHashing{
         }
         return true;
     }
-    /*
-    * - takes a key parameter
-    * - returns . null if the key doesn't exist
-    *           . the value of that key otherwise
+    /** 
+    * @Param the key 
+    * @return - null if the key doesn't exist
+    *         - the value of that key otherwise
     */
    public Object getValue(int key){
         Element requestedElement = this.storage[u.getHashValue(key)];
@@ -103,7 +103,7 @@ public class PerfectHashingN2Solution implements IPerfectHashing{
         return this.numberRehashing;
     }
     public int space(){
-        return this.maxSize;
+        return this.storage.length;
     }
 
 }

@@ -82,11 +82,8 @@ public int rehashingCount() {
 public int space(){
     int space = 0;
     for (int i = 0; i < Buckets.length; i++) {
-        if(Buckets[i]==null){
-            space++;
-        }
-        else{
-            space += Buckets[i].maxSize;
+        if(Buckets[i]!=null){
+            space += Buckets[i].space();
         }
     }
     return space;

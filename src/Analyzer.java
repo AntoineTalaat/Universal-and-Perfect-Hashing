@@ -25,7 +25,6 @@ public class Analyzer {
 
         PerfectHashingN2Solution N2 ;
         PerfectHashingNSolution N;
-        int nCount ,n2Count;
         for(int i = 100 ; i <= Math.pow(2, 13); i+=10){
                ArrayList<Map.Entry<Integer,Object>> input = generator.generateInput(i);
                N = new PerfectHashingNSolution(K,input);
