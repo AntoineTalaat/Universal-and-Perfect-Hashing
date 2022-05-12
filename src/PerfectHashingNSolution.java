@@ -74,4 +74,9 @@ public class PerfectHashingNSolution implements IPerfectHashing{
        System.out.println("First Level Collisions: "+FirstLevelCollisionCount);
        System.out.println("Second Level Rehashing count: "+SecondLevelRehashingCount);
    }
+
+@Override
+public int rehashingCount() {
+    return this.SecondLevelRehashingCount;
+}
 }

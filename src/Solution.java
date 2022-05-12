@@ -7,16 +7,16 @@ import java.util.concurrent.TimeUnit;
 public class Solution {
     static final int keyBits=32;
     public static void main(String[] args){
-        int inputSize=10;
-        // try {
-        //     TimeUnit.SECONDS.sleep(10);
-        // } catch (InterruptedException e) {
-        //     e.printStackTrace();
-        // }
+        int inputSize=(int) Math.pow(2, 17);
+        try {
+            TimeUnit.SECONDS.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         KeysGenerator gen = new KeysGenerator();
         ArrayList<Entry<Integer,Object>> g = gen.generateInput(inputSize);
-        PerfectHashingNSolution p1=new PerfectHashingNSolution(keyBits,g);
-        p1.printStorageContents();
+        IPerfectHashing p=new PerfectHashingN2Solution(keyBits,g);
+        System.out.println(p.rehashingCount());
     }
 
     private void testManually(){

@@ -98,4 +98,8 @@ public class PerfectHashingN2Solution implements IPerfectHashing{
            else System.out.println( storage[i].key + " >> " +storage[i].value);
        }
    }
+
+    public int rehashingCount() {
+        return this.numberRehashing;
+    }
 }
