@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 public class Solution {
     static final int keyBits=32;
     public static void main(String[] args){
-        int inputSize=(int) Math.pow(2, 17);
+        int inputSize=(int) Math.pow(2, 0);
         try {
             TimeUnit.SECONDS.sleep(10);
         } catch (InterruptedException e) {
@@ -15,8 +15,9 @@ public class Solution {
         }
         KeysGenerator gen = new KeysGenerator();
         ArrayList<Entry<Integer,Object>> g = gen.generateInput(inputSize);
-        IPerfectHashing p=new PerfectHashingN2Solution(keyBits,g);
-        System.out.println(p.rehashingCount());
+        IPerfectHashing p=new PerfectHashingNSolution(keyBits,g);
+        System.out.println("rehashing count : " + p.rehashingCount());
+        p.printStorageContents();
     }
 
     private void testManually(){
