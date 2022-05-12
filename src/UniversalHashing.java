@@ -12,6 +12,9 @@ public class UniversalHashing {
     }
 
     public int getHashValue(int key){
+        if(this.rows == 0){
+            return 0;
+        }
         boolean[] keyvector=this.getVectorFromInt(key,this.cols);
         return this.getIntFromVector(this.generateHashVector(keyvector),this.rows);
     }
@@ -83,6 +86,9 @@ public class UniversalHashing {
      * @return  randomly generated boolean matrix (dimensions rows*cols) of true or false entries
      */
     private boolean[][] generateRandomMatrix(int rows,int cols){
+        if(rows == 0){
+            return null;
+        }
         boolean[][] matrix=new boolean[rows][cols];
 
         //random settings

@@ -1,33 +1,22 @@
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 
 public class Solution {
     static final int keyBits=32;
     public static void main(String[] args){
-        Integer dummyForAllElements=50;
-        int inputSize=5000;
-        try {
-            TimeUnit.SECONDS.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        int inputSize=10;
+        // try {
+        //     TimeUnit.SECONDS.sleep(10);
+        // } catch (InterruptedException e) {
+        //     e.printStackTrace();
+        // }
         KeysGenerator gen = new KeysGenerator();
-        int[] input = gen.generateKeys(inputSize);
-
-        PerfectHashingN2Solution p1=new PerfectHashingN2Solution(inputSize,keyBits);
-        p1.setInput(input);
-        for(int i=0;i< input.length;i++){
-            p1.insert(input[i],dummyForAllElements);
-            try {
-                TimeUnit.MILLISECONDS.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-
-
-
+        ArrayList<Entry<Integer,Object>> g = gen.generateInput(inputSize);
+        PerfectHashingNSolution p1=new PerfectHashingNSolution(keyBits,g);
+        p1.printStorageContents();
     }
 
     private void testManually(){
@@ -35,14 +24,14 @@ public class Solution {
             System.out.println("Enter number of elements:");
             int num=sc.nextInt();
 
-            PerfectHashingN2Solution p1=new PerfectHashingN2Solution(num,keyBits);
+            PerfectHashingN2Solution p1=new PerfectHashingN2Solution(keyBits,new ArrayList<Map.Entry<Integer,Object>>());
 
             for(int i=0;i<num;i++){
                 sc.nextLine();
                 System.out.println("insert key and value :");
                 int key=sc.nextInt();
                 int value=sc.nextInt();
-                p1.insert(key,value);
+                p1.InsertAdditional(key, value);
             }
             sc.close();
             System.out.println("RESULTS");
