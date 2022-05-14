@@ -57,8 +57,17 @@ public class PerfectHashingNSolution<T> implements IPerfectHashing{
         }
     }
    public Object getValue(int key){
+       if(Buckets[this.FirstLevelHashing.getHashValue(key)!=null){
        return Buckets[this.FirstLevelHashing.getHashValue(key)].getValue(key);
+       }
+       else{return null;}
    }
+   public boolean contains(int key){
+if(Buckets[this.FirstLevelHashing.getHashValue(key)!=null){
+    return Buckets[this.FirstLevelHashing.getHashValue(key).contains(key);
+}
+return false;
+}
    public void printStorageContents(){
        int i=0;
        for (PerfectHashingN2Solution<T> bucket : Buckets) {
