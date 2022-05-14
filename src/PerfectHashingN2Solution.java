@@ -67,7 +67,7 @@ public class PerfectHashingN2Solution<T> implements IPerfectHashing{
         for(Element<T> inputElement:input){
             int hashvalue=u.getHashValue(inputElement.key);
                 Element<T> newElement = new Element<T>(inputElement.key, inputElement.value);
-                if(storage[hashvalue]==null) {//no collision
+                if(storage[hashvalue]==null||storage[hashvalue].key==inputElement.key) {//no collision
                     storage[hashvalue]=newElement;
                 }
                 else {return false;}
@@ -101,5 +101,12 @@ public class PerfectHashingN2Solution<T> implements IPerfectHashing{
     public int space(){
         return this.storage.length;
     }
+    public boolean contains(int key){
+     Element<T> requestedElement = this.storage[u.getHashValue(key)];
+     if (requestedElement==null||requestedElement.key!=key){
+         return false;
+}
+     return true;
+}
 
 }
