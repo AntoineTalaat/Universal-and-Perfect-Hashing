@@ -1,56 +1,57 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
-public class PerfectHashingNSolution implements IPerfectHashing{
-    PerfectHashingN2Solution[] Buckets;
+public class PerfectHashingNSolution<T> implements IPerfectHashing{
+    PerfectHashingN2Solution<T>[] Buckets;
     UniversalHashing FirstLevelHashing;
     int keybits = 32;
     int size = 0;
     int maxSize = 0;
-    int numberRehashing = 0;
     int FirstLevelCollisionCount = 0;
     int SecondLevelRehashingCount = 0;
-    ArrayList<Map.Entry<Integer,Object>>input;
+    List<Element<T>> input;
 
-    public PerfectHashingNSolution(int keybits,ArrayList<Map.Entry<Integer,Object>>input){
+    public PerfectHashingNSolution (int keybits,List<Element<T>>input){
         this.FirstLevelHashing = new UniversalHashing((int)Math.ceil(Math.log(input.size())/Math.log(2)),keybits);
         this.keybits = keybits;
         this.maxSize = input.size();
         this.insertBatch(input);
     }
-    // private void insert(int key, Object value){
-    //     int hashvalue=this.FirstLevelHashing.getHashValue(key);
-    //     this.size++;
-    //     assert this.size <= this.maxSize;
-    //     if(Buckets[hashvalue]==null){ //no collision
-    //         Buckets[hashvalue]=new PerfectHashingN2Solution(keybits,new ArrayList<Map.Entry<Integer,Object>>());
-    //         Buckets[hashvalue].InsertAdditional(key,value);
-    //     }
-    //     else{
-    //         //collision
-    //         this.FirstLevelCollisionCount++;
-    //         int prevcount = Buckets[hashvalue].numberRehashing;
-    //         //REHASHING
-    //         Buckets[hashvalue].InsertAdditional(key,value);
-    //         this.SecondLevelRehashingCount+= Buckets[hashvalue].numberRehashing - prevcount;
-    //     }
-    // }
+     private void insert(int key, T value){
+         int hashvalue=this.FirstLevelHashing.getHashValue(key);
+         this.size++;
+         assert this.size <= this.maxSize;
+         if(Buckets[hashvalue]==null){ //no collision
+             Buckets[hashvalue]=new PerfectHashingN2Solution<T>(keybits,new LinkedList<>());
+             Buckets[hashvalue].InsertAdditional(key,value);
+         }
+         else{
+             //collision
+             this.FirstLevelCollisionCount++;
+             int prevcount = Buckets[hashvalue].numberRehashing;
+             //REHASHING
+             Buckets[hashvalue].InsertAdditional(key,value);
+             this.SecondLevelRehashingCount+= Buckets[hashvalue].numberRehashing - prevcount;
+         }
+     }
     
-    public void insertBatch(ArrayList<Map.Entry<Integer,Object>> input){
+    public void insertBatch(List<Element<T>> input){
         this.input = input;
         this.Buckets = new PerfectHashingN2Solution[(int) Math.pow(2,(int)Math.ceil(Math.log(input.size())/Math.log(2)))];
-        for(Map.Entry<Integer,Object> element:input){
-            int hashvalue=FirstLevelHashing.getHashValue(element.getKey());
+        for(Element<T> element:input){
+            int hashvalue=FirstLevelHashing.getHashValue(element.key);
             if(Buckets[hashvalue]==null){
-                Buckets[hashvalue]=new PerfectHashingN2Solution(keybits,new ArrayList<Map.Entry<Integer,Object>>());
-                Buckets[hashvalue].InsertAdditional(element.getKey(),element.getValue());
+                Buckets[hashvalue]=new PerfectHashingN2Solution<T>(keybits,new LinkedList<Element<T>>());
+                Buckets[hashvalue].InsertAdditional(element.key,element.value);
             }
             else{
                 //collision
                 this.FirstLevelCollisionCount++;
                 int prevcount = Buckets[hashvalue].numberRehashing;
                 //REHASHING
-                Buckets[hashvalue].InsertAdditional(element.getKey(),element.getValue());
+                Buckets[hashvalue].InsertAdditional(element.key,element.value);
                 this.SecondLevelRehashingCount+= Buckets[hashvalue].numberRehashing - prevcount;
             }
         }
@@ -60,7 +61,7 @@ public class PerfectHashingNSolution implements IPerfectHashing{
    }
    public void printStorageContents(){
        int i=0;
-       for (PerfectHashingN2Solution bucket : Buckets) {
+       for (PerfectHashingN2Solution<T> bucket : Buckets) {
            System.out.print("Bucket " + (i++)+" : ");
            if(bucket!=null){
                System.out.print("\n");

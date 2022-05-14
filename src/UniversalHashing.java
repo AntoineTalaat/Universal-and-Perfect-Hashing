@@ -96,8 +96,7 @@ public class UniversalHashing {
         for(int i=0;i<rows;i++){
             for(int j=0;j<cols;j++){
                 float x= rand.nextFloat();
-                if(x<0.5) matrix[i][j]=true;
-                else matrix[i][j]=false;
+                matrix[i][j]= x < 0.5;
             }
         }
         return matrix;

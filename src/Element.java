@@ -1,8 +1,8 @@
-public class Element {
+public class Element<T> {
     int key;
-    Object value;
+    T value;
 
-    public Element(int k,Object v){
+    public Element(int k,T v){
         key=k;
         value=v;
     }

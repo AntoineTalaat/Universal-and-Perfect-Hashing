@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 
@@ -23,12 +24,12 @@ public class Analyzer {
             e.printStackTrace();
         }
 
-        PerfectHashingN2Solution N2 ;
-        PerfectHashingNSolution N;
-        for(int i = 100 ; i <= Math.pow(2, 13); i+=10){
-               ArrayList<Map.Entry<Integer,Object>> input = generator.generateInput(i);
-               N = new PerfectHashingNSolution(K,input);
-               N2 = new PerfectHashingN2Solution(K,input);
+        PerfectHashingN2Solution<Integer> N2 ;
+        PerfectHashingNSolution<Integer> N;
+        for(int i = 100 ; i <= 15000; i+=10){
+               List<Element<Integer>> input = generator.generateInput(i);
+               N = new PerfectHashingNSolution<Integer>(K,input);
+               N2 = new PerfectHashingN2Solution<>(K,input);
                appendToFile(nf_rehashing,N.rehashingCount());
                appendToFile(n2f_rehashing,N2.rehashingCount());
                appendToFile(nf_space,N.space());
